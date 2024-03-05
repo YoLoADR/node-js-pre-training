@@ -1,11 +1,13 @@
-const chalk = require('chalk') // Challenge 1: Importez le module 'chalk'. Expliquez l'utilité de ce module pour la personnalisation de l'affichage des textes dans la console.
+const chalk = require('chalk') // Challenge 1: Importez le module 'chalk' pour styliser le texte affiché dans la console. Expliquez ce qu'est un module et comment il est utilisé dans Node.js.
 
-const getNotes = require('./notes.js') // Challenge 2: Importez la fonction 'getNotes' depuis le fichier 'notes.js'. Discutez de l'importance de séparer le code en modules pour une meilleure organisation.
+const getNotes = require('./notes.js') // Challenge 2: Importez la fonction 'getNotes' depuis le fichier 'notes.js'. Discutez de l'importance de la modularité et du réusinage du code.
 
-const msg = getNotes() // Challenge 3: Utilisez la fonction 'getNotes' pour obtenir des notes et stockez le résultat dans 'msg'. Expliquez comment les fonctions peuvent être utilisées pour récupérer et organiser des données.
+const command = process.argv[2] // Challenge 3: Récupérez le troisième argument de la ligne de commande et stockez-le dans la variable 'command'. Expliquez comment 'process.argv' fonctionne et son utilité.
 
-console.log(msg) // Challenge 4: Affichez le message retourné par 'getNotes' en utilisant 'console.log'. Discutez de l'importance de l'affichage des informations pour le débogage et le feedback utilisateur.
+console.log(process.argv) // Challenge 4: Affichez le tableau des arguments de la ligne de commande. Discutez de la structure de 'process.argv' et comment les arguments sont passés à un script Node.js.
 
-const greenMsg = chalk.green.inverse.bold('Success!') // Challenge 5: Créez un message personnalisé 'Success!' en utilisant les styles de 'chalk'. Expliquez comment la méthode 'green.inverse.bold' modifie l'apparence du texte.
-
-console.log(greenMsg) // Challenge 6: Utilisez 'console.log' pour afficher le message stylisé. Discutez des avantages de l'utilisation de styles dans les messages de la console pour une meilleure lisibilité.
+if (command === 'add') {
+    console.log('Adding note!') // Challenge 5: Implémentez une condition pour vérifier si la commande est 'add'. Si oui, affichez 'Adding note!'. Discutez de l'utilisation des instructions conditionnelles en JavaScript.
+} else if (command === 'remove') {
+    console.log('Removing note!') // Challenge 6: Ajoutez une autre condition pour vérifier si la commande est 'remove'. Si oui, affichez 'Removing note!'. Expliquez comment les structures conditionnelles permettent de gérer différents scénarios.
+}
