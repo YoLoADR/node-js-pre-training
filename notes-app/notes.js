@@ -1,23 +1,19 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-const getNotes = () => {
-    return 'Your notes...'
-}
-
 const addNote = (title, body) => {
-    const notes = loadNotes()
-    const duplicateNotes = notes.filter((note) => note.title === title)
+    const notes = loadNotes() // Chargez les notes existantes.
+    const duplicateNote = notes.find((note) => note.title === title) // Recherchez une note avec le même titre.
 
-    if (duplicateNotes.length === 0) {
+    if (!duplicateNote) {
         notes.push({
             title: title,
-            body: body
+            body: body // Ajoutez la nouvelle note si aucun doublon n'a été trouvé.
         })
-        saveNotes(notes)
-        console.log(chalk.green.inverse('New note added!'))
+        saveNotes(notes) // Sauvegardez les notes mises à jour dans le fichier.
+        console.log(chalk.green.inverse('New note added!')) // Informez l'utilisateur que la note a été ajoutée.
     } else {
-        console.log(chalk.red.inverse('Note title taken!'))
+        console.log(chalk.red.inverse('Note title taken!')) // Avertissez l'utilisateur si une note avec le même titre existe déjà.
     }
 }
 
@@ -34,15 +30,26 @@ const removeNote = (title) => {
 }
 
 const listNotes = () => {
-    const notes = loadNotes() // Chargez les notes existantes en utilisant la fonction 'loadNotes'.
+    const notes = loadNotes()
 
-    console.log(chalk.inverse('Your notes')) // Utilisez 'chalk' pour mettre en évidence le titre de la section lors de l'affichage des notes.
+    console.log(chalk.inverse('Your notes'))
 
     notes.forEach((note) => {
-        console.log(note.title) // Affichez le titre de chaque note stockée.
+        console.log(note.title)
     })
-} // Créez une fonction 'listNotes' pour lister le titre de toutes les notes sauvegardées.
+}
 
+const readNote = (title) => {
+    const notes = loadNotes() // Chargez les notes existantes.
+    const note = notes.find((note) => note.title === title) // Trouvez la note avec le titre fourni.
+
+    if (note) {
+        console.log(chalk.inverse(note.title)) // Affichez le titre de la note trouvée.
+        console.log(note.body) // Affichez le corps de la note trouvée.
+    } else {
+        console.log(chalk.red.inverse('Note not found!')) // Informez l'utilisateur si aucune note avec le titre fourni n'a été trouvée.
+    }
+}
 
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes)
@@ -60,8 +67,8 @@ const loadNotes = () => {
 }
 
 module.exports = {
-    getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
-    listNotes: listNotes
-} // Exportez les fonctions pour les rendre accessibles dans d'autres fichiers.
+    listNotes: listNotes,
+    readNote: readNote
+}

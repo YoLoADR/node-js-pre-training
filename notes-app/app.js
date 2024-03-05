@@ -47,16 +47,23 @@ yargs.command({
     command: 'list',
     describe: 'List your notes',
     handler() {
-        notes.listNotes() // Appelez la fonction 'listNotes' du module 'notes' pour lister toutes les notes enregistrées.
+        notes.listNotes()
     }
-}) // Créez une nouvelle commande 'list' permettant à l'utilisateur de lister toutes ses notes.
+})
 
 // Create read command
 yargs.command({
     command: 'read',
     describe: 'Read a note',
-    handler() {
-        console.log('Reading a note')
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.readNote(argv.title)
     }
 })
 
