@@ -1,5 +1,9 @@
-const getNotes = require('./notes.js') // Challenge 1: Importez la fonction 'getNotes' du fichier 'notes.js'. Expliquez ce que fait 'require' et comment il est utilisé pour importer des modules.
+const validator = require('validator') // Challenge 1: Importez le module 'validator'. Expliquez ce que fait ce module et pourquoi il peut être utile.
 
-const msg = getNotes() // Challenge 2: Appelez la fonction 'getNotes' et stockez le résultat dans la variable 'msg'. Discutez de l'importance des fonctions et comment elles retournent des valeurs.
+const getNotes = require('./notes.js') // Challenge 2: Importez la fonction 'getNotes' depuis le fichier 'notes.js'. Discutez de la relation entre les fichiers et comment Node.js utilise 'require' pour importer des fonctionnalités.
 
-console.log(msg) // Challenge 3: Utilisez 'console.log' pour afficher le message retourné par 'getNotes'. Expliquez comment 'console.log' fonctionne et pourquoi il est utile pour le débogage.
+const msg = getNotes() // Challenge 3: Stockez le résultat de 'getNotes()' dans la variable 'msg'. Expliquez le concept de variables et comment elles peuvent être utilisées pour stocker des données.
+
+console.log(msg) // Challenge 4: Utilisez 'console.log' pour afficher le message retourné par 'getNotes'. Discutez de l'importance du débogage et comment 'console.log' peut y aider.
+
+console.log(validator.isURL('https/mead.io')) // Challenge 5: Utilisez la méthode 'isURL' du module 'validator' pour vérifier si 'https/mead.io' est une URL valide. Discutez de la validation des données et de son importance.
