@@ -59,12 +59,12 @@ yargs.command({
         title: {
             describe: 'Note title',
             demandOption: true,
-            type: 'string'
+            type: 'string' // Exige que l'utilisateur fournisse un titre pour la note à lire, et ce titre doit être une chaîne de caractères.
         }
     },
     handler(argv) {
-        notes.readNote(argv.title)
+        notes.readNote(argv.title) // Appelle la fonction 'readNote' avec le titre fourni par l'utilisateur pour lire et afficher la note.
     }
-})
+}) // Créez une commande 'read' qui permet à l'utilisateur de lire une note spécifique en fournissant un titre.
 
 yargs.parse()
