@@ -1,11 +1,11 @@
-const chalk = require('chalk') // Utilisez 'chalk' pour ajouter de la couleur au texte dans la console, facilitant la distinction des messages.
+const chalk = require('chalk')
+const yargs = require('yargs')
+const notes = require('./notes.js')
 
-const yargs = require('yargs') // Utilisez 'yargs' pour construire une interface de ligne de commande interactive, facilitant la réception et le traitement des entrées utilisateur.
+// Customize yargs version
+yargs.version('1.1.0')
 
-const notes = require('./notes.js') // Importez les fonctionnalités du fichier 'notes.js' pour pouvoir les utiliser dans ce fichier.
-
-yargs.version('1.1.0') // Définissez une version personnalisée pour votre application CLI, aidant les utilisateurs à identifier la version de votre outil.
-
+// Create add command
 yargs.command({
     command: 'add',
     describe: 'Add a new note',
@@ -13,7 +13,7 @@ yargs.command({
         title: {
             describe: 'Note title',
             demandOption: true,
-            type: 'string' // Définit le type de l'option 'title', forçant l'utilisateur à fournir une chaîne de caractères.
+            type: 'string'
         },
         body: {
             describe: 'Note body',
@@ -21,11 +21,12 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function (argv) {
-        notes.addNote(argv.title, argv.body) // Ajoute une nouvelle note en utilisant les arguments fournis par l'utilisateur.
+    handler(argv) {
+        notes.addNote(argv.title, argv.body)
     }
-}) // Créez une nouvelle commande 'add' pour ajouter des notes.
+})
 
+// Create remove command
 yargs.command({
     command: 'remove',
     describe: 'Remove a note',
@@ -36,25 +37,25 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function (argv) {
-        notes.removeNote(argv.title) // Supprime la note correspondante en utilisant le titre fourni par l'utilisateur.
+    handler(argv) {
+        notes.removeNote(argv.title)
     }
-}) // Créez une nouvelle commande 'remove' pour supprimer des notes.
+})
 
 // Create list command
 yargs.command({
     command: 'list',
     describe: 'List your notes',
-    handler: function () {
-        console.log('Listing out all notes')
+    handler() {
+        notes.listNotes() // Appelez la fonction 'listNotes' du module 'notes' pour lister toutes les notes enregistrées.
     }
-})
+}) // Créez une nouvelle commande 'list' permettant à l'utilisateur de lister toutes ses notes.
 
 // Create read command
 yargs.command({
     command: 'read',
     describe: 'Read a note',
-    handler: function () {
+    handler() {
         console.log('Reading a note')
     }
 })
