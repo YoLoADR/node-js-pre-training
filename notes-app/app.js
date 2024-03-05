@@ -1,11 +1,11 @@
-const chalk = require('chalk')
-const yargs = require('yargs')
-const notes = require('./notes.js') // Importez votre propre module 'notes' qui contient des fonctions pour manipuler les notes.
+const chalk = require('chalk') // Utilisez 'chalk' pour ajouter de la couleur au texte dans la console, facilitant la distinction des messages.
 
-// Customize yargs version
-yargs.version('1.1.0')
+const yargs = require('yargs') // Utilisez 'yargs' pour construire une interface de ligne de commande interactive, facilitant la réception et le traitement des entrées utilisateur.
 
-// Create add command
+const notes = require('./notes.js') // Importez les fonctionnalités du fichier 'notes.js' pour pouvoir les utiliser dans ce fichier.
+
+yargs.version('1.1.0') // Définissez une version personnalisée pour votre application CLI, aidant les utilisateurs à identifier la version de votre outil.
+
 yargs.command({
     command: 'add',
     describe: 'Add a new note',
@@ -13,7 +13,7 @@ yargs.command({
         title: {
             describe: 'Note title',
             demandOption: true,
-            type: 'string'
+            type: 'string' // Définit le type de l'option 'title', forçant l'utilisateur à fournir une chaîne de caractères.
         },
         body: {
             describe: 'Note body',
@@ -22,19 +22,24 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        notes.addNote(argv.title, argv.body) // Appelle la fonction 'addNote' pour ajouter une nouvelle note, en utilisant les données fournies par l'utilisateur.
+        notes.addNote(argv.title, argv.body) // Ajoute une nouvelle note en utilisant les arguments fournis par l'utilisateur.
     }
-}) // Créez une commande 'add' qui permet aux utilisateurs d'ajouter de nouvelles notes.
+}) // Créez une nouvelle commande 'add' pour ajouter des notes.
 
-
-// Create remove command
 yargs.command({
     command: 'remove',
     describe: 'Remove a note',
-    handler: function () {
-        console.log('Removing the note')
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function (argv) {
+        notes.removeNote(argv.title) // Supprime la note correspondante en utilisant le titre fourni par l'utilisateur.
     }
-})
+}) // Créez une nouvelle commande 'remove' pour supprimer des notes.
 
 // Create list command
 yargs.command({
