@@ -1,13 +1,46 @@
-const chalk = require('chalk') // Challenge 1: Importez le module 'chalk' pour styliser le texte affiché dans la console. Expliquez ce qu'est un module et comment il est utilisé dans Node.js.
+const chalk = require('chalk') // Challenge 1: Importez le module 'chalk'. Discutez de l'utilité de ce module pour personnaliser l'affichage des textes dans la console.
 
-const getNotes = require('./notes.js') // Challenge 2: Importez la fonction 'getNotes' depuis le fichier 'notes.js'. Discutez de l'importance de la modularité et du réusinage du code.
+const yargs = require('yargs') // Challenge 2: Importez le module 'yargs'. Expliquez son rôle dans la gestion des arguments de ligne de commande pour les applications Node.js.
 
-const command = process.argv[2] // Challenge 3: Récupérez le troisième argument de la ligne de commande et stockez-le dans la variable 'command'. Expliquez comment 'process.argv' fonctionne et son utilité.
+const getNotes = require('./notes.js') // Challenge 3: Importez la fonction 'getNotes' depuis le fichier 'notes.js'. Discutez de l'utilisation des modules pour structurer une application Node.js.
 
-console.log(process.argv) // Challenge 4: Affichez le tableau des arguments de la ligne de commande. Discutez de la structure de 'process.argv' et comment les arguments sont passés à un script Node.js.
+// Customize yargs version
+yargs.version('1.1.0') // Challenge 4: Personnalisez la version de 'yargs'. Expliquez comment la version peut influencer l'utilisation de l'application par les utilisateurs finaux.
 
-if (command === 'add') {
-    console.log('Adding note!') // Challenge 5: Implémentez une condition pour vérifier si la commande est 'add'. Si oui, affichez 'Adding note!'. Discutez de l'utilisation des instructions conditionnelles en JavaScript.
-} else if (command === 'remove') {
-    console.log('Removing note!') // Challenge 6: Ajoutez une autre condition pour vérifier si la commande est 'remove'. Si oui, affichez 'Removing note!'. Expliquez comment les structures conditionnelles permettent de gérer différents scénarios.
-}
+// Create add command
+yargs.command({
+    command: 'add',
+    describe: 'Add a new note',
+    handler: function () {
+        console.log('Adding a new note!') // Challenge 5: Définissez une commande 'add' avec yargs pour ajouter une nouvelle note. Discutez de la structure d'une commande yargs et de son rôle.
+    }
+})
+
+// Create remove command
+yargs.command({
+    command: 'remove',
+    describe: 'Remove a note',
+    handler: function () {
+        console.log('Removing the note') // Challenge 6: Définissez une commande 'remove' avec yargs pour supprimer une note existante. Expliquez comment les commandes peuvent être utilisées pour interagir avec l'application.
+    }
+})
+
+// Create list command
+yargs.command({
+    command: 'list',
+    describe: 'List your notes',
+    handler: function () {
+        console.log('Listing out all notes') // Challenge 7: Définissez une commande 'list' pour lister toutes les notes. Discutez de l'importance de visualiser les informations stockées.
+    }
+})
+
+// Create read command
+yargs.command({
+    command: 'read',
+    describe: 'Read a note',
+    handler: function () {
+        console.log('Reading a note') // Challenge 8: Définissez une commande 'read' pour lire le contenu d'une note spécifique. Expliquez comment accéder aux données spécifiques peut être utile dans une application.
+    }
+})
+
+console.log(yargs.argv) // Challenge 9: Affichez les arguments de ligne de commande analysés par yargs. Discutez de l'importance de comprendre les entrées de l'utilisateur dans le développement de commandes CLI.
