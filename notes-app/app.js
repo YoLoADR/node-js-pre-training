@@ -1,6 +1,6 @@
 const chalk = require('chalk')
 const yargs = require('yargs')
-const getNotes = require('./notes.js')
+const notes = require('./notes.js') // Importez votre propre module 'notes' qui contient des fonctions pour manipuler les notes.
 
 // Customize yargs version
 yargs.version('1.1.0')
@@ -22,10 +22,10 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log('Title: ' + argv.title)
-        console.log('Body: ' + argv.body)
+        notes.addNote(argv.title, argv.body) // Appelle la fonction 'addNote' pour ajouter une nouvelle note, en utilisant les données fournies par l'utilisateur.
     }
-})
+}) // Créez une commande 'add' qui permet aux utilisateurs d'ajouter de nouvelles notes.
+
 
 // Create remove command
 yargs.command({
