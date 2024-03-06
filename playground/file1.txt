@@ -1,0 +1,1 @@
+Contenu du premier fichier. Ceci est destiné à simuler une opération de lecture de fichier.
