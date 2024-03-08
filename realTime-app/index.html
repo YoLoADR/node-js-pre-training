@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chat en temps réel avec WebSocket</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        function sendMessage() {
+            var message = document.getElementById('message').value;
+            socket.emit('message', message);
+        }
+
+        socket.on('message', function (msg) {
+            var item = document.createElement('li');
+            item.textContent = msg;
+            document.getElementById('messages').appendChild(item);
+        });
+    </script>
+</head>
+
+<body>
+    <ul id="messages"></ul>
+    <input id="message" autocomplete="off" /><button onclick="sendMessage()">Envoyer</button>
+</body>
+
+</html>
